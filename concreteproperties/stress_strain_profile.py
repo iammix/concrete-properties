@@ -273,6 +273,38 @@ class WhitneyStressBlock(StressStrainProfile):
 # class PCAStressProfile(StressStrainProfile):
 #     pass
 
+class Concrete_NonlinearEC2(StressStrainProfile):
+    def __init__(self, fcm, ec, ecu):
+        """
+        Inits EN1992 Nonlinear Concrete Material
+        :param float fcm: compressive strength of concrete in MPa
+        :param float ec: Strain at the yielding stress
+        :param float ecu: Ultimate Strain of the material
+        """
+        self.fcm = fcm
+        self.ec = ec
+        self.ecu = ecu
+        self.Ec = 22000 * (fcm / 10) ** 0.3
+        self.k = 1.05 * self.Ec * self.ec / self.fcm
+
+    def get_stress(self, sig_c) -> float:
+        result = 0
+
+        eta = sig_c / self.ec
+        if sig_c > 0 and sig_c <= self.ecu:
+            result = self.fcm * (self.k * eta - eta ** 2) / (1 + (self.k - 2) * eta)
+
+        return result
+
+    def test(self):
+        x = np.arange(0, self.ecu * 2, self.ecu / 10000.0)
+        y = []
+        for para in x:
+            y.append(self.get_stress(para))
+        y = np.array(y)
+        plt.plot(x, y, 'b-')
+        plt.grid()
+        plt.show()
 
 class SteelElasticPlastic(BilinearProfile):
     """Class for a perfectly elastic-plastic steel stress-strain profile."""
