@@ -93,8 +93,8 @@ def plotting_context(
         ax.set_aspect("equal", anchor="C")
 
     if filename and fig:
-        fig.savefig(filename, dpi=fig.dpi)
-        plt.close(fig)  # close the figure to free the memory
+        fig.savefig(filename, dpi=fig.dpi)  # pyright: ignore
+        plt.close(fig)  # pyright: ignore  # close the figure to free the memory
         return  # if the figure was to be saved, then don't show it also
 
     if render:
