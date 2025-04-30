@@ -98,7 +98,7 @@ jobs:
       run: uv python install ${{ matrix.python }}
 
     - name: Install test dependencies
-      run: uv sync -p ${{ matrix.python }} --frozen --no-group dev --no-group docs 
+      run: uv sync -p ${{ matrix.python }} --frozen --no-group dev --no-group docs
         --no-group lint
 
     - name: Run pytest
@@ -129,7 +129,7 @@ jobs:
       run: uv python install ${{ env.DEFAULT_PYTHON_VERSION }}
 
     - name: Install dependencies
-      run: uv sync -p ${{ env.DEFAULT_PYTHON_VERSION }} --frozen --no-group dev 
+      run: uv sync -p ${{ env.DEFAULT_PYTHON_VERSION }} --frozen --no-group dev
         --no-group lint --no-group test
 
     - name: Install pandoc
