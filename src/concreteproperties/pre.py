@@ -56,7 +56,7 @@ class CPGeom:
 
         for hole in self.geom.interiors:
             hole_polygon = Polygon(hole)
-            self.holes += tuple(hole_polygon.representative_point().coords)
+            self.holes += tuple(hole_polygon.representative_point().coords)  # pyright: ignore [reportOperatorIssue]
 
     def round_geometry(
         self,
@@ -103,7 +103,8 @@ class CPGeom:
         # perimeter, note in shapely last point == first point
         if geometry.exterior:
             for coords in list(geometry.exterior.coords[:-1]):
-                points.append(coords)
+                x, y = list(coords)
+                points.append((x, y))
                 master_count += 1
 
         facets += self.create_facets(points)
@@ -156,7 +157,7 @@ class CPGeom:
         Returns:
             Geometry centroid
         """
-        return self.geom.centroid.coords[0]
+        return self.geom.centroid.x, self.geom.centroid.y
 
     def calculate_extents(self) -> tuple[float, float, float, float]:
         """Calculates the extents of the geometry.

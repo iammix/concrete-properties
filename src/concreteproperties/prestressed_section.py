@@ -305,7 +305,7 @@ class PrestressedSection(ConcreteSection):
         if cr_stress_res._m_net:
             m_net = cr_stress_res._m_net
             # if we guess the bending direction wrong
-            if m_net > 0 and m_net_guess < 0 or m_net < 0 and m_net_guess > 0:
+            if (m_net > 0 and m_net_guess < 0) or (m_net < 0 and m_net_guess > 0):
                 # change bending direction
                 theta -= np.pi
 
