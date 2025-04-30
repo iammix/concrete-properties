@@ -185,7 +185,7 @@ expressed using ``[kN]`` and ``[m]`` by creating an appropriate ``UnitDisplay`` 
 
   from concreteproperties.post import UnitDisplay
 
-  kn_m = UnitDisplay(si_kn_m = UnitDisplay(
+  kn_m = UnitDisplay(
     length="m", force="kN", mass="kg", length_factor=1e3, force_factor=1e3
   )
 
