@@ -53,7 +53,7 @@ version-resolver:
 # Custom text at start of release
 header: |
 
-  Insert header here...
+  This release adds support for python 3.13, drops support for python 3.10 and improves default number formatting (a breaking change)!
 
 template: |
 
